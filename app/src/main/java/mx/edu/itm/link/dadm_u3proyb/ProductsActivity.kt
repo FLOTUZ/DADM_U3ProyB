@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -24,6 +25,7 @@ import mx.edu.itm.link.dadm_u3proyb.adapters.ProductsAdapter
 import mx.edu.itm.link.dadm_u3proyb.models.Negocio
 import mx.edu.itm.link.dadm_u3proyb.models.Producto
 import mx.edu.itm.link.dadm_u3proyb.models.Usuario
+import mx.edu.itm.link.dadm_u3proyb.ui.GlobalViewModel
 import mx.edu.itm.link.dadm_u3proyb.utils.MyUtils
 import mx.edu.itm.link.dadm_u3proyb.utils.MyUtils.Companion.dbGet
 import mx.edu.itm.link.dadm_u3proyb.utils.MyUtils.Companion.toast
@@ -40,6 +42,8 @@ class ProductsActivity : AppCompatActivity() {
 
     private lateinit var negocio: Negocio
 
+    private val viewModel: GlobalViewModel by viewModels()
+
     private lateinit var url : String
     private val pedido = ArrayList<String>()
     private var total = 0.0
@@ -55,6 +59,9 @@ class ProductsActivity : AppCompatActivity() {
         fab = findViewById(R.id.fabFavProducts)
 
         negocio = intent.getSerializableExtra("negocio") as Negocio
+
+        viewModel.setLatNegocio(negocio.lat)
+        viewModel.setLngNegocio(negocio.lng)
 
         if(negocio == null) {
             finish()
