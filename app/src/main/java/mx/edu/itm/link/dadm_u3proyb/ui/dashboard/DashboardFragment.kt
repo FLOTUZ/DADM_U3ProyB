@@ -34,12 +34,12 @@ class DashboardFragment : Fragment() {
             viewModel.getLng.observe(viewLifecycleOwner, { lng ->
                 viewModel.getLat.observe(viewLifecycleOwner, { lat ->
                     if (lat != 0.0 && lng != 0.0) {
-                        map.getMapAsync {
+                        map.getMapAsync { map ->
                             val current = LatLng(lat, lng)
-                            it.addMarker(
+                            map.addMarker(
                                 MarkerOptions().position(current).title("Tu ubicacion")
                             )
-                            it.moveCamera(CameraUpdateFactory.newLatLng(current))
+                            map.moveCamera(CameraUpdateFactory.newLatLng(current))
                         }
                     }
                 })

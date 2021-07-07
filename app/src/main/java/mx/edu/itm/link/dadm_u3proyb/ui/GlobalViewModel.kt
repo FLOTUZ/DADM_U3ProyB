@@ -14,7 +14,6 @@ class GlobalViewModel : ViewModel() {
 
     fun setLat(latitude: Double) {
         lat.value = latitude
-
     }
 
     fun setLng(longitude: Double) {

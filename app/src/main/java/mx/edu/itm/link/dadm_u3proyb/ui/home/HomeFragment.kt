@@ -2,18 +2,13 @@ package mx.edu.itm.link.dadm_u3proyb.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.edu.itm.link.dadm_u3proyb.R
 import mx.edu.itm.link.dadm_u3proyb.adapters.CommerceAdapter
 import mx.edu.itm.link.dadm_u3proyb.models.Negocio
-import mx.edu.itm.link.dadm_u3proyb.ui.GlobalViewModel
 import mx.edu.itm.link.dadm_u3proyb.utils.MyUtils
 import org.json.JSONObject
 
