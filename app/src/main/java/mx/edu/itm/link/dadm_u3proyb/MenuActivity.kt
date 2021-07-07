@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -23,7 +24,8 @@ class MenuActivity : AppCompatActivity() {
 
     private lateinit var usuario: Usuario
 
-    private lateinit var viewModel: GlobalViewModel
+
+    private val viewModel: GlobalViewModel by viewModels()
 
     private var lat: Double = 0.0
     private var lng: Double = 0.0
@@ -54,7 +56,6 @@ class MenuActivity : AppCompatActivity() {
             finish()
         }
 
-        viewModel = ViewModelProvider(this).get(GlobalViewModel::class.java)
         viewModel.setLat(lat)
         viewModel.setLng(lng)
 

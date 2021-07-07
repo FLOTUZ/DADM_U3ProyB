@@ -2,7 +2,9 @@ package mx.edu.itm.link.dadm_u3proyb.ui.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,14 @@ class HomeFragment : Fragment() {
 
     private lateinit var url : String
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -25,7 +35,7 @@ class HomeFragment : Fragment() {
 
         object : MyUtils(){
             override fun formatResponse(response: String) {
-                Log.i("Comercios",response)
+                Log.i("COMERCIOS",response)
                 try {
                     val json = JSONObject(response)
                     val output = json.getJSONArray("output")
