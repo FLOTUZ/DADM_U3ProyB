@@ -5,11 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -28,22 +26,42 @@ class DashboardFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
+        viewModel.getLatN.observe(viewLifecycleOwner, Observer {
+            Log.d("LATNEGOCIO", "LAT NEGOCIO: $it")
+        })
+
+        viewModel.getLngN.observe(viewLifecycleOwner, Observer {
+            Log.d("LATNEGOCIO", "LNG NEGOCIO: $it")
+        })
+
         childFragmentManager.findFragmentById(R.id.map)?.let {
             val map = it as SupportMapFragment
 
-            viewModel.getLng.observe(viewLifecycleOwner, { lng ->
-                viewModel.getLat.observe(viewLifecycleOwner, { lat ->
-                    if (lat != 0.0 && lng != 0.0) {
+            /*
+            * latD = Latitud del dispositivo
+            * lngD = longitud del dispositivo
+            * latN = Latitud del negocio
+            * lngN = longitud del negocio
+            */
+            viewModel.getLng.observe(viewLifecycleOwner, { lngD ->
+                viewModel.getLat.observe(viewLifecycleOwner, { latD ->
+
+                    if (latD != 0.0 && lngD != 0.0) {
                         map.getMapAsync { map ->
-                            val current = LatLng(lat, lng)
+                            val local = LatLng(latD, lngD)
+                            val negocio = LatLng(19.7229386, -101.1858201)
                             map.addMarker(
-                                MarkerOptions().position(current).title("Tu ubicacion")
+                                MarkerOptions().position(local).title("Tu ubicacion")
                             )
-                            map.moveCamera(CameraUpdateFactory.newLatLng(current))
+                            map.addMarker(
+                                MarkerOptions().position(negocio).title("Tu pedido")
+                            )
+                            map.moveCamera(CameraUpdateFactory.newLatLng(local))
                         }
                     }
                 })
             })
+
 
         }
 

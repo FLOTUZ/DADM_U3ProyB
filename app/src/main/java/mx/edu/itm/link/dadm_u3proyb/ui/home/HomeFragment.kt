@@ -35,12 +35,12 @@ class HomeFragment : Fragment() {
 
         object : MyUtils(){
             override fun formatResponse(response: String) {
-                Log.i("COMERCIOS",response)
                 try {
                     val json = JSONObject(response)
                     val output = json.getJSONArray("output")
 
                     val negocios = ArrayList<Negocio>()
+
                     for(i in 0..output.length()-1) {
                         val jsonCommerce = output.getJSONObject(i)
                         val negocio = Negocio(

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAccess : ExtendedFloatingActionButton
     private lateinit var btnRegister : ExtendedFloatingActionButton
 
-    val viewModel: GlobalViewModel by viewModels()
+    private val viewModel: GlobalViewModel by viewModels()
 
     private var lat = 0.0
     private var lng = 0.0
