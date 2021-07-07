@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import mx.edu.itm.link.dadm_u3proyb.R
@@ -55,8 +56,21 @@ class DashboardFragment : Fragment() {
                             )
                             map.addMarker(
                                 MarkerOptions().position(negocio).title("Tu pedido")
+                                    .icon(
+                                        BitmapDescriptorFactory.defaultMarker(
+                                            BitmapDescriptorFactory.HUE_GREEN
+                                        )
+                                    )
                             )
                             map.moveCamera(CameraUpdateFactory.newLatLng(local))
+                            map.animateCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        latD,
+                                        lngD
+                                    ), 13.0f
+                                )
+                            )
                         }
                     }
                 })
