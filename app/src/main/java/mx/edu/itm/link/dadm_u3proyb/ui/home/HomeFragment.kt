@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ import org.json.JSONObject
 class HomeFragment : Fragment() {
 
     private lateinit var url : String
+    private lateinit var recyclerNegocios: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +32,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerNegocios = view.findViewById<RecyclerView>(R.id.recyclerCommerces)
+        val editSearch = view.findViewById<EditText>(R.id.editSearch)
+
+        recyclerNegocios = view.findViewById(R.id.recyclerCommerces)
 
         url = resources.getString(R.string.api)+"comercios.php"
 
@@ -57,10 +62,20 @@ class HomeFragment : Fragment() {
                         )
 
                         negocios.add(negocio)
+
+                        //Se crea la lista con el Recycler (Lista completa)
+                        actualizarLista(view, negocios)
                     }
 
-                    recyclerNegocios.adapter = CommerceAdapter(view.context, R.layout.recycler_row_commerce, negocios)
-                    recyclerNegocios.layoutManager = LinearLayoutManager(view.context)
+                    editSearch.doOnTextChanged { text, start, before, count ->
+                        val listaFiltrada = negocios.filter { n ->
+                            n.commerce.contains(text.toString(), ignoreCase = true) ||
+                            n.description.contains(text.toString(), ignoreCase = true) ||
+                            n.category.contains(text.toString(), ignoreCase = true)
+                        }
+                        Log.d("LISTAFILTRADA", listaFiltrada.toString())
+                        actualizarLista(view, listaFiltrada as ArrayList<Negocio>)
+                    }
 
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -68,6 +83,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }.consumeGet(view.context, url)
+    }
+
+    fun actualizarLista(view: View, negocios: ArrayList<Negocio>) {
+        recyclerNegocios.adapter = CommerceAdapter(view.context, R.layout.recycler_row_commerce, negocios)
+        recyclerNegocios.layoutManager = LinearLayoutManager(view.context)
     }
 
 }
