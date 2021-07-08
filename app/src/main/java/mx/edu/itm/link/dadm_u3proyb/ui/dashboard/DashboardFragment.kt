@@ -27,11 +27,11 @@ class DashboardFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-        viewModel.getLatN.observe(viewLifecycleOwner, Observer {
+        viewModel.getLatNegocio.observe(viewLifecycleOwner, Observer {
             Log.d("LATNEGOCIO", "LAT NEGOCIO: $it")
         })
 
-        viewModel.getLngN.observe(viewLifecycleOwner, Observer {
+        viewModel.getlngNegocio.observe(viewLifecycleOwner, Observer {
             Log.d("LATNEGOCIO", "LNG NEGOCIO: $it")
         })
 

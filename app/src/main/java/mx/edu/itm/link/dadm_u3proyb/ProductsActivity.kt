@@ -60,8 +60,6 @@ class ProductsActivity : AppCompatActivity() {
 
         negocio = intent.getSerializableExtra("negocio") as Negocio
 
-        viewModel.setLatNegocio(negocio.lat)
-        viewModel.setLngNegocio(negocio.lng)
 
         if(negocio == null) {
             finish()
@@ -80,6 +78,11 @@ class ProductsActivity : AppCompatActivity() {
         textInfoCommerce.text = "Descripción: ${negocio.description}"
         textInfoCommerce.text = "${textInfoCommerce.text}\nDirección: ${negocio.address} (${negocio.lat},${negocio.lng})"
         textInfoCommerce.text = "${textInfoCommerce.text}\nCategoria: ${negocio.category}"
+
+        val latNegocio = negocio.lat
+        val lngNegocio = negocio.lng
+        viewModel.setLatNegocio(latNegocio)
+        viewModel.setLngNegocio(lngNegocio)
 
         try {
             val endPoint = "${url}menu_negocio.php?id=${negocio.id}"
