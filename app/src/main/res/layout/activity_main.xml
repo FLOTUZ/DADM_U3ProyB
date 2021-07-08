@@ -20,7 +20,7 @@
             android:background="#00ffffff"
             android:drawableEnd="@android:drawable/ic_dialog_email"
             android:layout_margin="@dimen/margenes"
-            android:text="alex@itm.edu.mx"
+            android:text="emmanuel@mail.com"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -38,7 +38,7 @@
             android:background="#00ffffff"
             android:drawableEnd="@android:drawable/ic_lock_idle_lock"
             android:layout_margin="@dimen/margenes"
-            android:text="123"
+            android:text="papaya"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
