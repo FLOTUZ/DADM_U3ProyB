@@ -10,6 +10,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mx.edu.itm.link.dadm_u3proyb.R
 import mx.edu.itm.link.dadm_u3proyb.adapters.CommerceAdapter
 import mx.edu.itm.link.dadm_u3proyb.models.Negocio
@@ -18,7 +19,7 @@ import org.json.JSONObject
 
 class HomeFragment : Fragment() {
 
-    private lateinit var url : String
+    private lateinit var url: String
     private lateinit var recyclerNegocios: RecyclerView
 
     override fun onCreateView(
@@ -33,12 +34,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val editSearch = view.findViewById<EditText>(R.id.editSearch)
+        val fabOnlyFav = view.findViewById<FloatingActionButton>(R.id.fabOnlyFav)
 
         recyclerNegocios = view.findViewById(R.id.recyclerCommerces)
 
-        url = resources.getString(R.string.api)+"comercios.php"
+        url = resources.getString(R.string.api) + "comercios.php"
 
-        object : MyUtils(){
+        object : MyUtils() {
             override fun formatResponse(response: String) {
                 try {
                     val json = JSONObject(response)
@@ -46,7 +48,7 @@ class HomeFragment : Fragment() {
 
                     val negocios = ArrayList<Negocio>()
 
-                    for(i in 0..output.length()-1) {
+                    for (i in 0..output.length() - 1) {
                         val jsonCommerce = output.getJSONObject(i)
                         val negocio = Negocio(
                             jsonCommerce.getInt("id"),
@@ -57,7 +59,7 @@ class HomeFragment : Fragment() {
                             jsonCommerce.getDouble("longitud"),
                             jsonCommerce.getInt("id_categoria"),
                             jsonCommerce.getString("categoria"),
-                            if(jsonCommerce.getInt("favorito")==1) true else false,
+                            if (jsonCommerce.getInt("favorito") == 1) true else false,
                             jsonCommerce.getString("foto")
                         )
 
@@ -73,8 +75,25 @@ class HomeFragment : Fragment() {
                             n.description.contains(text.toString(), ignoreCase = true) ||
                             n.category.contains(text.toString(), ignoreCase = true)
                         }
-                        Log.d("LISTAFILTRADA", listaFiltrada.toString())
                         actualizarLista(view, listaFiltrada as ArrayList<Negocio>)
+                    }
+
+                    var faboritosSeleccionado = false //Variable de control para el fab
+                    fabOnlyFav.setOnClickListener {
+                        //Cambia de true a false o viceversa
+                        faboritosSeleccionado = !faboritosSeleccionado
+
+                        //Si el boton esta seleccionado
+                        if (faboritosSeleccionado) {
+                            //Filtra por favorito
+                            val listaFiltrada = negocios.filter { n ->
+                                n.favorite
+                            }
+                            actualizarLista(view, listaFiltrada as ArrayList<Negocio>)
+                        }else{
+                            //Si no, mete toda la lista sin filtrar
+                            actualizarLista(view, negocios)
+                        }
                     }
 
                 } catch (e: Exception) {
@@ -86,7 +105,8 @@ class HomeFragment : Fragment() {
     }
 
     fun actualizarLista(view: View, negocios: ArrayList<Negocio>) {
-        recyclerNegocios.adapter = CommerceAdapter(view.context, R.layout.recycler_row_commerce, negocios)
+        recyclerNegocios.adapter =
+            CommerceAdapter(view.context, R.layout.recycler_row_commerce, negocios)
         recyclerNegocios.layoutManager = LinearLayoutManager(view.context)
     }
 
