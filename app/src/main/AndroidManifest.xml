@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.edu.itm.link.dadm_u3proyb">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/food_bank_48dp"
@@ -10,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DADM_U3ProyB"
         android:usesCleartextTraffic="true">
+        <activity android:name=".EditarUsuario"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -18,7 +23,7 @@
         <activity
             android:name=".ProductsActivity"
             android:label="@string/title_activity_products"
-            android:theme="@style/Theme.DADM_U3ProyB.NoActionBar"></activity>
+            android:theme="@style/Theme.DADM_U3ProyB.NoActionBar" />
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu" />
@@ -30,10 +35,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

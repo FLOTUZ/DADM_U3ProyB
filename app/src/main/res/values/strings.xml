@@ -10,6 +10,7 @@
 
     <string name="api">http://198.199.83.125/my_eats/</string>
     <!-- End API -->
+    <string name="apiNode">http://198.199.83.125:3000/</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_products">ScrollingActivity</string>
