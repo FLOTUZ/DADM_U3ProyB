@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DADM_U3ProyB"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditarUsuario"></activity>
+        <activity android:name=".ResgistroUsuario"></activity>
+        <activity android:name=".EditarUsuario" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -63,6 +63,11 @@ class MainActivity : AppCompatActivity() {
         btnAccess = findViewById(R.id.btnAccess)
         btnRegister = findViewById(R.id.btnRegister)
 
+        btnRegister.setOnClickListener {
+            val intent = Intent(this, ResgistroUsuario::class.java)
+            startActivity(intent)
+        }
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         dbGet()?.let {

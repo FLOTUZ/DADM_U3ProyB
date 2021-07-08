@@ -40,7 +40,7 @@ class NotificationsFragment : Fragment() {
         val user = MainActivity.usuarioLogueado
         binding.lblNombre.text = user.name
         binding.lblTelefono.text = user.celphone
-        binding.lblNombre.text = user.usr
+        binding.lblEmail.text = user.usr
 
         binding.fabEditar.setOnClickListener {
             val intent = Intent(view.context, EditarUsuario::class.java)
