@@ -21,7 +21,7 @@ data class Negocio(
     @SerializedName("categoria")
     val category: String,
     @SerializedName("favorito")
-    val favorite: Boolean,
+    var favorite: Boolean,
     @SerializedName("foto")
     val photo: String?
 ) : Serializable

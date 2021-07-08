@@ -119,8 +119,18 @@ class HomeFragment : Fragment() {
 
                     object : MyUtils(){
                         override fun formatResponse(response: String) {
-                            Toast.makeText(view.context, response, Toast.LENGTH_SHORT).show()
-                            Log.d("FAVORITO", response)
+                            val respuesta = JSONObject(response)
+                            val code = respuesta.getInt("code")
+
+                            if (code == 200) {
+                                for (n in negocios){
+                                    if (n == negocio){
+                                        n.favorite = !n.favorite
+                                    }
+                                }
+                                actualizarLista(view, negocios)
+                                Log.d("FAVORITO", response)
+                            }
                         }
                     }.consumePost(view.context, url, params)
                 }
