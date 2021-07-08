@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import mx.edu.itm.link.dadm_u3proyb.MainActivity
 import mx.edu.itm.link.dadm_u3proyb.R
 import mx.edu.itm.link.dadm_u3proyb.adapters.CommerceAdapter
 import mx.edu.itm.link.dadm_u3proyb.models.Negocio
@@ -106,7 +108,23 @@ class HomeFragment : Fragment() {
 
     fun actualizarLista(view: View, negocios: ArrayList<Negocio>) {
         recyclerNegocios.adapter =
-            CommerceAdapter(view.context, R.layout.recycler_row_commerce, negocios)
+            object: CommerceAdapter(view.context, R.layout.recycler_row_commerce, negocios){
+                override fun setFavorito(negocio: Negocio) {
+                    val url = "${resources.getString(R.string.api)}/fav.php"
+
+                    val idUser = MainActivity.usuarioLogueado.id
+                    val params = HashMap<String,String>()
+                    params.put("usr", idUser.toString())
+                    params.put("com", negocio.id.toString())
+
+                    object : MyUtils(){
+                        override fun formatResponse(response: String) {
+                            Toast.makeText(view.context, response, Toast.LENGTH_SHORT).show()
+                            Log.d("FAVORITO", response)
+                        }
+                    }.consumePost(view.context, url, params)
+                }
+            }
         recyclerNegocios.layoutManager = LinearLayoutManager(view.context)
     }
 

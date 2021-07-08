@@ -13,7 +13,7 @@ import mx.edu.itm.link.dadm_u3proyb.ProductsActivity
 import mx.edu.itm.link.dadm_u3proyb.R
 import mx.edu.itm.link.dadm_u3proyb.models.Negocio
 
-class CommerceAdapter(val context: Context, val res: Int, val list: ArrayList<Negocio>) : RecyclerView.Adapter<CommerceAdapter.CommerceViewHolder>() {
+abstract class CommerceAdapter(val context: Context, val res: Int, val list: ArrayList<Negocio>) : RecyclerView.Adapter<CommerceAdapter.CommerceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommerceViewHolder {
         return CommerceViewHolder(
@@ -52,6 +52,17 @@ class CommerceAdapter(val context: Context, val res: Int, val list: ArrayList<Ne
                 imgFav.setImageResource(R.mipmap.heart_border_24dp)
             }
 
+            var contorlFav = negocio.favorite
+            imgFav.setOnClickListener {
+                setFavorito(negocio)
+                contorlFav = !contorlFav
+                if(contorlFav) {
+                    imgFav.setImageResource(R.mipmap.heart_24dp)
+                } else {
+                    imgFav.setImageResource(R.mipmap.heart_border_24dp)
+                }
+            }
+
             itemView.setOnClickListener {
                 val intent = Intent(context, ProductsActivity::class.java)
                 intent.putExtra("negocio", negocio)
@@ -60,5 +71,6 @@ class CommerceAdapter(val context: Context, val res: Int, val list: ArrayList<Ne
         }
 
     }
+    abstract fun setFavorito(negocio: Negocio)
 
 }

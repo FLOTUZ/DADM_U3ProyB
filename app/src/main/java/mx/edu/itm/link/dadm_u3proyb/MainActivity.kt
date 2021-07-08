@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
     private var lat = 0.0
     private var lng = 0.0
 
+    companion object{
+        lateinit var usuarioLogueado: Usuario
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -209,6 +213,7 @@ class MainActivity : AppCompatActivity() {
                         this@MainActivity.dbSet(usuario)
                     }
 
+                    usuarioLogueado = usuario
                     val intent = Intent(this@MainActivity, MenuActivity::class.java)
                     intent.putExtra("usuario", usuario)
                     intent.putExtra("lat", lat)
