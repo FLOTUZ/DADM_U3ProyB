@@ -42,8 +42,6 @@ class ProductsActivity : AppCompatActivity() {
 
     private lateinit var negocio: Negocio
 
-    private val viewModel: GlobalViewModel by viewModels()
-
     private lateinit var url : String
     private val pedido = ArrayList<String>()
     private var total = 0.0
@@ -51,6 +49,8 @@ class ProductsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products)
+
+        val viewModel: GlobalViewModel by viewModels()
 
         imgProducts = findViewById(R.id.imgProducts)
         textInfoCommerce = findViewById(R.id.textInfoCommerce)

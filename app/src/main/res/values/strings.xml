@@ -10,7 +10,7 @@
 
     <string name="api">http://198.199.83.125/my_eats/</string>
     <!-- End API -->
-    <string name="apiNode">https://ponyeats.herokuapp.com/</string>
+    <string name="apiNode">http://192.168.0.62:4000/</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_products">ScrollingActivity</string>

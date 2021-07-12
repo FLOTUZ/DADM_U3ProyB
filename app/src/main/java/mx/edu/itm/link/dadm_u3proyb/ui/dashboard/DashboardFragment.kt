@@ -27,11 +27,11 @@ class DashboardFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-        viewModel.getLatNegocio.observe(viewLifecycleOwner, Observer {
+        viewModel.latNegocio.observe(viewLifecycleOwner, Observer {
             Log.d("LATNEGOCIO", "LAT NEGOCIO: $it")
         })
 
-        viewModel.getlngNegocio.observe(viewLifecycleOwner, Observer {
+        viewModel.lngNegocio.observe(viewLifecycleOwner, Observer {
             Log.d("LATNEGOCIO", "LNG NEGOCIO: $it")
         })
 
@@ -44,8 +44,8 @@ class DashboardFragment : Fragment() {
             * latN = Latitud del negocio
             * lngN = longitud del negocio
             */
-            viewModel.getLng.observe(viewLifecycleOwner, { lngD ->
-                viewModel.getLat.observe(viewLifecycleOwner, { latD ->
+            viewModel.lng.observe(viewLifecycleOwner, { lngD ->
+                viewModel.lat.observe(viewLifecycleOwner, { latD ->
 
                     if (latD != 0.0 && lngD != 0.0) {
                         map.getMapAsync { map ->
