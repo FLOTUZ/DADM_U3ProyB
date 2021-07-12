@@ -13,8 +13,9 @@ class GlobalViewModel : ViewModel() {
     val latNegocio = MutableLiveData<Double>()
     val lngNegocio = MutableLiveData<Double>()
 
-    private val pedidoActual = MutableLiveData<Pedido>()
-    private val listaPedidos = MutableLiveData<ArrayList<Pedido>>()
+    val pedidoActual = MutableLiveData<Pedido>()
+
+    val listaPedidos = MutableLiveData<ArrayList<Pedido>>()
 
     // Setters coordenadas del negocio
     fun setLatNegocio(lat: Double) {
